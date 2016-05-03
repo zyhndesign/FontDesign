@@ -27,6 +27,9 @@ public class ChineseCharacter implements Serializable {
 	@GeneratedValue
 	private Integer id;
 	
+	@Column(name="author")
+	private String author;
+	
 	@Column(name="title") 
 	private String title;
 	
@@ -121,6 +124,14 @@ public class ChineseCharacter implements Serializable {
 
 	public void setChineseCharacterTag(List<ChineseCharacterTag> chineseCharacterTag) {
 		this.chineseCharacterTag = chineseCharacterTag;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	
 }

@@ -46,6 +46,14 @@ public class ChineseCharacterTag implements Serializable{
 	public void setTag(Tag tag) {
 		this.tag = tag;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 	
 }
