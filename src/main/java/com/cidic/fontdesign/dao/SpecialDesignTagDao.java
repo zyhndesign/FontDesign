@@ -2,6 +2,7 @@ package com.cidic.fontdesign.dao;
 
 import java.util.List;
 
+import com.cidic.fontdesign.model.SpecialDesign;
 import com.cidic.fontdesign.model.SpecialDesignTag;
 
 public interface SpecialDesignTagDao {
@@ -12,6 +13,6 @@ public interface SpecialDesignTagDao {
 	
 	public void updateSpecialDesignTag(SpecialDesignTag courseDesignTag, int courseDesignTagId);
 	
-	public List<SpecialDesignTag> getSpecialDesignByTagName(List<String> tagName);
+	public List<SpecialDesign> getSpecialDesignByTagName(List<String> tagName);
 	
 }

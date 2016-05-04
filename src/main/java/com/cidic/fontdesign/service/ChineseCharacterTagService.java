@@ -2,6 +2,7 @@ package com.cidic.fontdesign.service;
 
 import java.util.List;
 
+import com.cidic.fontdesign.model.ChineseCharacter;
 import com.cidic.fontdesign.model.ChineseCharacterTag;
 
 public interface ChineseCharacterTagService {
@@ -12,5 +13,5 @@ public interface ChineseCharacterTagService {
 	
 	public void updateChineseCharacterTag(ChineseCharacterTag chineseCharacterTag, int chineseCharacterTagId);
 	
-	public List<ChineseCharacterTag> getChineseCharacterByTagName(List<String> tagName);
+	public List<ChineseCharacter> getChineseCharacterByTagName(List<String> tagName);
 }

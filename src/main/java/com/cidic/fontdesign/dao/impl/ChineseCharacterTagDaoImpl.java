@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import com.cidic.fontdesign.dao.ChineseCharacterTagDao;
 import com.cidic.fontdesign.model.ChineseCharacter;
 import com.cidic.fontdesign.model.ChineseCharacterTag;
 import com.cidic.fontdesign.model.Tag;
@@ -21,9 +22,9 @@ import com.cidic.fontdesign.util.DateUtil;
 @Repository
 @Component
 @Qualifier(value = "chineseCharacterTagDao")
-public class ChineseCharacterTagDao implements com.cidic.fontdesign.dao.ChineseCharacterTagDao {
+public class ChineseCharacterTagDaoImpl implements ChineseCharacterTagDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(ChineseCharacterTagDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(ChineseCharacterTagDaoImpl.class);
 	
 	@Autowired
 	@Qualifier("sessionFactory")
@@ -73,7 +74,7 @@ public class ChineseCharacterTagDao implements com.cidic.fontdesign.dao.ChineseC
 	}
 
 	@Override
-	public List<ChineseCharacterTag> getChineseCharacterByTagName(List<String> tagName) {
+	public List<ChineseCharacter> getChineseCharacterByTagName(List<String> tagName) {
 		Session session = this.getSessionFactory().getCurrentSession();
 		String sqlSelected = "select c.id as chineseCharacter_tag_id, t.id as tagId, d.id as chineseCharacter_id, t.tag_name, d.title, d.author,"
 				+ " d.thumbnail, d.create_time, d.content, d.top_tag  from chinese_character_tag c cross  join tag t cross  join"
@@ -111,7 +112,7 @@ public class ChineseCharacterTagDao implements com.cidic.fontdesign.dao.ChineseC
 		    chineseCharacterList.add(chineseCharacter);
 		}
 		
-		return chineseCharacterTagList;
+		return chineseCharacterList;
 	}
 
 }

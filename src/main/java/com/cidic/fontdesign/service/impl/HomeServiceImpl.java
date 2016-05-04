@@ -12,6 +12,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cidic.fontdesign.model.ChineseCharacter;
+import com.cidic.fontdesign.model.SpecialDesign;
+import com.cidic.fontdesign.service.ChineseCharacterService;
+import com.cidic.fontdesign.service.ChineseCharacterTagService;
+import com.cidic.fontdesign.service.HomeService;
+import com.cidic.fontdesign.service.SpecialDesignService;
+import com.cidic.fontdesign.service.SpecialDesignTagService;
+
 
 @Service
 @Component
@@ -20,28 +28,21 @@ import org.springframework.transaction.annotation.Transactional;
 public class HomeServiceImpl implements HomeService {
 
 	@Autowired
-	@Qualifier(value="coursewareServiceImpl")
-	private CoursewareService coursewareServiceImpl;
+	@Qualifier(value="chineseCharacterServiceImpl")
+	private ChineseCharacterService chineseCharacterServiceImpl;
 	
 	@Autowired
-	@Qualifier(value="courseDesignServiceImpl")
-	private CourseDesignService courseDesignServiceImpl;
+	@Qualifier(value="chineseCharacterTagServiceImpl")
+	private ChineseCharacterTagService chineseCharacterTagServiceImpl;
 	
 	@Autowired
-	@Qualifier(value="videoCourseServiceImpl")
-	private VideoCourseService videoCourseServiceImpl;
+	@Qualifier(value="specialDesignServiceImpl")
+	private SpecialDesignService specialDesignServiceImpl;
 	
 	@Autowired
-	@Qualifier(value="courseDesignTagServiceImpl")
-	private CourseDesignTagService courseDesignTagServiceImpl;
+	@Qualifier(value="specialDesignTagServiceImpl")
+	private SpecialDesignTagService specialDesignTagServiceImpl;
 	
-	@Autowired
-	@Qualifier(value="coursewareTagServiceImpl")
-	private CoursewareTagService coursewareTagServiceImpl;
-	
-	@Autowired
-	@Qualifier(value="videoCourseTagServiceImpl")
-	private VideoCourseTagService videoCourseTagServiceImpl;
 	
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -49,12 +50,10 @@ public class HomeServiceImpl implements HomeService {
 		
 		List<Object> list = new ArrayList<Object>();
 		
-		List<Courseware> courseWareList = coursewareServiceImpl.getTopCourseware();
-		List<CourseDesign> courseDesignList = courseDesignServiceImpl.getTopCourseDesign();
-		List<VideoCourse> videoCourseList = videoCourseServiceImpl.getTopVideoCourse();
-		list.add(courseWareList);
-		list.add(courseDesignList);
-		list.add(videoCourseList);
+		List<ChineseCharacter> chineseCharacterList = chineseCharacterServiceImpl.getTopChineseCharacter();
+		List<SpecialDesign> specialDesignList = specialDesignServiceImpl.getTopSpecialDesign();
+		list.add(chineseCharacterList);
+		list.add(specialDesignList);
 		
 		return list;
 	}
@@ -65,14 +64,12 @@ public class HomeServiceImpl implements HomeService {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		List<CourseDesign> courseDesignList = courseDesignTagServiceImpl.getCourseDesignByTagName(keywords);
-		map.put("CourseDesign", courseDesignList);
+		List<ChineseCharacter> chineseCharacterList = chineseCharacterTagServiceImpl.getChineseCharacterByTagName(keywords);
+		map.put("ChineseCharacter", chineseCharacterList);
 		
-		List<Courseware> coursewareList = coursewareTagServiceImpl.getCoursewareByTagName(keywords);
-		map.put("Courseware", coursewareList);
+		List<SpecialDesign> specialDesignList = specialDesignTagServiceImpl.getSpecialDesignByTagName(keywords);
+		map.put("SpecialDesign", specialDesignList);
 		
-		List<VideoCourse> videoCourseList = videoCourseTagServiceImpl.getVideoCourseByTagName(keywords);
-		map.put("VideoCourse", videoCourseList);
 		
 		return map;
 	}

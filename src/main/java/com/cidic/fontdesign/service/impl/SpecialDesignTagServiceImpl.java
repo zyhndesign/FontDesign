@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cidic.fontdesign.dao.SpecialDesignTagDao;
+import com.cidic.fontdesign.model.SpecialDesign;
 import com.cidic.fontdesign.model.SpecialDesignTag;
 import com.cidic.fontdesign.service.SpecialDesignTagService;
 
@@ -42,7 +43,7 @@ public class SpecialDesignTagServiceImpl implements SpecialDesignTagService {
 	}
 
 	@Override
-	public List<SpecialDesignTag> getSpecialDesignByTagName(List<String> tagName) {
+	public List<SpecialDesign> getSpecialDesignByTagName(List<String> tagName) {
 		
 		return specialDesignTagDao.getSpecialDesignByTagName(tagName);
 	}

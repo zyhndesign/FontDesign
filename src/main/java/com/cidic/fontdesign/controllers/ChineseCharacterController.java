@@ -19,6 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cidic.fontdesign.exception.FontDesignException;
+import com.cidic.fontdesign.model.ChineseCharacter;
+import com.cidic.fontdesign.model.ChineseCharacterPageModel;
+import com.cidic.fontdesign.model.ListResultModel;
+import com.cidic.fontdesign.model.ResultModel;
+import com.cidic.fontdesign.service.ChineseCharacterService;
+import com.cidic.fontdesign.util.DateUtil;
+
 
 @Controller
 @RequestMapping("/chineseCharacter")
@@ -27,42 +35,42 @@ public class ChineseCharacterController {
 	private static final Logger logger = LoggerFactory.getLogger(ChineseCharacterController.class);
 	
 	@Autowired
-	@Qualifier(value="coursewareServiceImpl")
-	private CoursewareService coursewareServiceImpl;
+	@Qualifier(value="chineseCharacterServiceImpl")
+	private ChineseCharacterService chineseCharacterServiceImpl;
 	
 	private ResultModel resultModel = null;
 	
-	@ExceptionHandler(UIDesignException.class)
-	public @ResponseBody ResultModel handleCustomException(UIDesignException ex) {
+	@ExceptionHandler(FontDesignException.class)
+	public @ResponseBody ResultModel handleCustomException(FontDesignException ex) {
 		ResultModel resultModel = new ResultModel();
 		resultModel.setResultCode(ex.getErrCode());
 		resultModel.setMessage(ex.getErrMsg());
 		return resultModel;
 	}
 	
-	@RequestMapping(value = {"/courseWareCOR"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/chineseCharacterCOR"}, method = RequestMethod.GET)
 	public ModelAndView getCourseWareCORView(HttpServletRequest request) {
 		ModelAndView view = new ModelAndView();
-		view.setViewName("/admin/courseWareCOR");
+		view.setViewName("/admin/chineseCharacterCOR");
 		return view;
 	}
 	
-	@RequestMapping(value = {"/courseWareCOR/{id}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/chineseCharacterCOR/{id}"}, method = RequestMethod.GET)
 	public ModelAndView getCourseWareCOR(HttpServletRequest request,@PathVariable int id) {
-		Courseware courseware = null;
+		ChineseCharacter chineseCharacter = null;
 		if (id > 0){
-			courseware = coursewareServiceImpl.selectCourseware(id);
+			chineseCharacter = chineseCharacterServiceImpl.selectChineseCharacter(id);
 		}
 		ModelAndView view = new ModelAndView();
-		view.setViewName("/admin/courseWareCOR");
-		view.addObject("courseware", courseware);
+		view.setViewName("/admin/chineseCharacterCOR");
+		view.addObject("chineseCharacter", chineseCharacter);
 		return view;
 	}
 	
-	@RequestMapping(value = "/courseWareMgr", method = RequestMethod.GET)
+	@RequestMapping(value = "/chineseCharacterMgr", method = RequestMethod.GET)
 	public ModelAndView getCourseWareMgr(HttpServletRequest request) {
 		ModelAndView view = new ModelAndView();
-		view.setViewName("/admin/courseWareMgr");
+		view.setViewName("/admin/chineseCharacterMgr");
 		return view;
 	}
 	
@@ -72,27 +80,27 @@ public class ChineseCharacterController {
 			@RequestParam String thumbnail,@RequestParam String createTime,@RequestParam String content,
 			@RequestParam int topTag,@RequestParam String abstract_,@RequestParam String insertTag){
 		
-		Courseware courseware = new Courseware();
-		courseware.setTitle(title);
-		courseware.setAuthor(author);
-		courseware.setContent(content);
+		ChineseCharacter chineseCharacter = new ChineseCharacter();
+		chineseCharacter.setTitle(title);
+		chineseCharacter.setAuthor(author);
+		chineseCharacter.setContent(content);
 		if (createTime.equals("")){
-			courseware.setCreateTime(new Date());
+			chineseCharacter.setCreateTime(new Date());
 		}
 		else{
-			courseware.setCreateTime(DateUtil.stringToDate(createTime));
+			chineseCharacter.setCreateTime(DateUtil.stringToDate(createTime));
 		}
 		
-		courseware.setThumbnail(thumbnail);
-		courseware.setTopTag(topTag);
-		courseware.setAbstract_(abstract_);
+		chineseCharacter.setThumbnail(thumbnail);
+		chineseCharacter.setTopTag(topTag);
+		chineseCharacter.setAbstract_(abstract_);
 		try{
-			coursewareServiceImpl.insertCourseware(courseware,insertTag);
+			chineseCharacterServiceImpl.insertChineseCharacter(chineseCharacter,insertTag);
 			resultModel = new ResultModel();
 			resultModel.setResultCode(200);
 		}
 		catch(Exception e){
-			throw new UIDesignException(500, "写入数据出错");
+			throw new FontDesignException(500, "写入数据出错");
 		}
 		return resultModel;
 	}
@@ -100,20 +108,20 @@ public class ChineseCharacterController {
 	@RequestMapping(value = "/select/{id}", method = RequestMethod.GET, produces="application/json")  
 	@ResponseBody 
 	public ResultModel selectCourseware(HttpServletRequest request,HttpServletResponse response,@PathVariable int id) throws Exception{
-		Courseware courseware = null;
+		ChineseCharacter chineseCharacter = null;
 		try{
 			response.setContentType("text/html;charset=UTF-8");
 			response.addHeader("Access-Control-Allow-Origin","*");
 		    if("IE".equals(request.getParameter("type"))){
 		    	response.addHeader("XDomainRequestAllowed","1");
 		    }
-			courseware = coursewareServiceImpl.selectCourseware(id);
+		    chineseCharacter = chineseCharacterServiceImpl.selectChineseCharacter(id);
 			resultModel = new ResultModel();
 			resultModel.setResultCode(200);
-			resultModel.setObject(courseware);
+			resultModel.setObject(chineseCharacter);
 		}
 		catch(Exception e){
-			throw new UIDesignException(500, "获取数据出错");
+			throw new FontDesignException(500, "获取数据出错");
 		}
 		return resultModel;
 	}
@@ -123,28 +131,28 @@ public class ChineseCharacterController {
 	public ResultModel updateCourseware(@RequestParam String title, @RequestParam String author,
 			@RequestParam String thumbnail,@RequestParam String createTime,@RequestParam String content,
 			@RequestParam int topTag,@RequestParam String abstract_,@PathVariable int id,@RequestParam String insertTag,@RequestParam String deleteTag){
-		Courseware courseware = new Courseware();
-		courseware.setId(id);
-		courseware.setTitle(title);
-		courseware.setAuthor(author);
-		courseware.setContent(content);
+		ChineseCharacter chineseCharacter = new ChineseCharacter();
+		chineseCharacter.setId(id);
+		chineseCharacter.setTitle(title);
+		chineseCharacter.setAuthor(author);
+		chineseCharacter.setContent(content);
 		if (createTime.equals("")){
-			courseware.setCreateTime(new Date());
+			chineseCharacter.setCreateTime(new Date());
 		}
 		else{
-			courseware.setCreateTime(DateUtil.stringToDate(createTime));
+			chineseCharacter.setCreateTime(DateUtil.stringToDate(createTime));
 		}
 		
-		courseware.setThumbnail(thumbnail);
-		courseware.setTopTag(topTag);
-		courseware.setAbstract_(abstract_);
+		chineseCharacter.setThumbnail(thumbnail);
+		chineseCharacter.setTopTag(topTag);
+		chineseCharacter.setAbstract_(abstract_);
 		try{
-			coursewareServiceImpl.updateCourseware(courseware,insertTag,deleteTag);
+			chineseCharacterServiceImpl.updateChineseCharacter(chineseCharacter,insertTag,deleteTag);
 			resultModel = new ResultModel();
 			resultModel.setResultCode(200);
 		}
 		catch(Exception e){
-			throw new UIDesignException(500, "更新数据出错");
+			throw new FontDesignException(500, "更新数据出错");
 		}
 		return resultModel;
 	}
@@ -152,15 +160,15 @@ public class ChineseCharacterController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces="application/json")  
 	@ResponseBody 
 	public ResultModel deleteCourseware(@PathVariable int id){
-		Courseware courseware = new Courseware();
-		courseware.setId(id);
+		ChineseCharacter chineseCharacter = new ChineseCharacter();
+		chineseCharacter.setId(id);
 		try{
-			coursewareServiceImpl.deleteCourseware(courseware);
+			chineseCharacterServiceImpl.deleteChineseCharacter(chineseCharacter);
 			resultModel = new ResultModel();
 			resultModel.setResultCode(200);
 		}
 		catch(Exception e){
-			throw new UIDesignException(500, "删除数据出错");
+			throw new FontDesignException(500, "删除数据出错");
 		}
 		return resultModel;
 	}
@@ -170,12 +178,12 @@ public class ChineseCharacterController {
 	public ListResultModel listCourseware(@RequestParam int iDisplayLength, @RequestParam int iDisplayStart,@RequestParam String sEcho){
 		ListResultModel listResultModel = new ListResultModel();
 		try{
-			CoursewarePageModel coursewarePageModel  = coursewareServiceImpl.getDataByPage(iDisplayLength, iDisplayStart, sEcho);
-			List<Courseware> list = coursewarePageModel.getList();
+			ChineseCharacterPageModel chineseCharacterPageModel  = chineseCharacterServiceImpl.getDataByPage(iDisplayLength, iDisplayStart, sEcho);
+			List<ChineseCharacter> list = chineseCharacterPageModel.getList();
 			listResultModel.setAaData(list);
 			listResultModel.setsEcho(sEcho);
-			listResultModel.setiTotalRecords(coursewarePageModel.getCount());
-			listResultModel.setiTotalDisplayRecords(coursewarePageModel.getCount());
+			listResultModel.setiTotalRecords(chineseCharacterPageModel.getCount());
+			listResultModel.setiTotalDisplayRecords(chineseCharacterPageModel.getCount());
 			listResultModel.setSuccess(true);
 		}
 		catch(Exception e){
@@ -194,7 +202,7 @@ public class ChineseCharacterController {
 		    if("IE".equals(request.getParameter("type"))){
 		    	response.addHeader("XDomainRequestAllowed","1");
 		    }
-			List<Courseware> list = coursewareServiceImpl.getFrontDataByPage(limit, offset, choice);
+			List<ChineseCharacter> list = chineseCharacterServiceImpl.getFrontDataByPage(limit, offset, choice);
 			listResultModel.setAaData(list);
 			listResultModel.setiTotalRecords(list.size());
 			listResultModel.setiTotalDisplayRecords(offset + list.size());

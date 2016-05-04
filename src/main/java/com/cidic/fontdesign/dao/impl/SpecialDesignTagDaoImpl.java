@@ -71,7 +71,7 @@ public class SpecialDesignTagDaoImpl implements SpecialDesignTagDao {
 	}
 
 	@Override
-	public List<SpecialDesignTag> getSpecialDesignByTagName(List<String> tagName) {
+	public List<SpecialDesign> getSpecialDesignByTagName(List<String> tagName) {
 		Session session = this.getSessionFactory().getCurrentSession();
 		String sqlSelected = "select c.id as course_design_tag_id, t.id as tagId, d.id as special_design_id,"
 				+ "t.tag_name,d.abstract,d.special_detail_id,d.create_time,d.teacher,d.title, d.top_tag from"
@@ -110,7 +110,7 @@ public class SpecialDesignTagDaoImpl implements SpecialDesignTagDao {
 		    specialDesignList.add(specialDesign);
 		}
 		
-		return specialDesignTagList;
+		return specialDesignList;
 	}
 
 }
