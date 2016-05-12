@@ -10,7 +10,7 @@ var config={
     qiNiu:{
     	upTokenUrl:"getUploadKey",
         uploadDomain:"http://qiniu-plupload.qiniudn.com/",
-        bucketDomain:"http://7xsv6i.com1.z0.glb.clouddn.com/",
+        bucketDomain:"http://7xtna1.com1.z0.glb.clouddn.com/",
         swfUrl:"resources/js/lib/Moxie.swf"
     },
     ajaxUrls:{
