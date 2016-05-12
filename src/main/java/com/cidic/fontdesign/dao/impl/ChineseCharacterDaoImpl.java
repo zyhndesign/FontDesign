@@ -70,10 +70,10 @@ public class ChineseCharacterDaoImpl implements ChineseCharacterDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		String hql; 
 		if (category == 0){
-			hql = " from ChineseCharacter where order by createTime desc"; 
+			hql = " from ChineseCharacter order by createTime desc "; 
 		}
 		else{
-			hql = " from ChineseCharacter where category=:category order by createTime desc";
+			hql = " from ChineseCharacter where category=:category order by createTime desc ";
 		}
 	
         final Query query = session.createQuery(hql);   
@@ -92,18 +92,18 @@ public class ChineseCharacterDaoImpl implements ChineseCharacterDao {
 		String hql = null; 
 		if (choice == 0){
 			if (category == 0){
-				hql = "from ChineseCharacter order by createTime desc";
+				hql = " from ChineseCharacter order by createTime desc ";
 			}
 			else{
-				hql = "from ChineseCharacter where category=:category order by createTime desc";
+				hql = " from ChineseCharacter where category=:category order by createTime desc ";
 			}
 		}
 		else{
 			if (category == 0){
-				hql = "from ChineseCharacter where topTag=1 order by createTime desc";
+				hql = " from ChineseCharacter where topTag=1 order by createTime desc ";
 			}
 			else{
-				hql = "from ChineseCharacter where topTag=1 and category=:category order by createTime desc";
+				hql = " from ChineseCharacter where topTag=1 and category=:category order by createTime desc ";
 			}
 			
 		}

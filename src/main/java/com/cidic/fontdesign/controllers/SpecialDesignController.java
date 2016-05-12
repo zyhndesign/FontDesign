@@ -28,7 +28,7 @@ import com.cidic.fontdesign.service.SpecialDesignService;
 import com.cidic.fontdesign.util.DateUtil;
 
 @Controller
-@RequestMapping("/specialdesign")
+@RequestMapping("/specialDesign")
 public class SpecialDesignController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SpecialDesignController.class);
