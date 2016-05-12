@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
                 <h1 class="panel-title">教学课件</h1>
             </div>
             <div class="panel-body" id="opt-body">
-                <a class="btn btn-success" href="courseware/courseWareCOR">
+                <a class="btn btn-success" href="chineseCharacter/chineseCharacterCOR">
                     <span class="glyphicon glyphicon-plus"></span> 新建
                 </a>
                 <div class="input-group tableSearchContainer col-md-6">

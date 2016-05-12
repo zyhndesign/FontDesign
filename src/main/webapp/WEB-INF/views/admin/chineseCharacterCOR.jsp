@@ -59,7 +59,8 @@ pageEncoding="UTF-8"%>
                 <div class="form-group">
                     <label  class="control-label col-md-2">标题*</label>
                     <div class="col-md-8">
-                    <input type="text" class="form-control" value="${chineseCharacter.title}" name="title">
+                        <input type="text" class="form-control" value="${chineseCharacter.title}" name="title">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label  class="control-label col-md-2">分类*</label>
