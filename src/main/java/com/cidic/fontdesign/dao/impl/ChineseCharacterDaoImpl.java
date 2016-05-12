@@ -68,11 +68,20 @@ public class ChineseCharacterDaoImpl implements ChineseCharacterDao {
 	@Override
 	public List<ChineseCharacter> getDataByPage(int limit, int offset, String sEcho,int category) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		final String hql = " from ChineseCharacter where category=:category order by createTime desc"; 
+		String hql; 
+		if (category == 0){
+			hql = " from ChineseCharacter where order by createTime desc"; 
+		}
+		else{
+			hql = " from ChineseCharacter where category=:category order by createTime desc";
+		}
+	
         final Query query = session.createQuery(hql);   
         query.setFirstResult(offset);    
         query.setMaxResults(limit); 
-        query.setParameter("category", category);
+        if (category == 0){
+        	query.setParameter("category", category);
+        }
         final List<ChineseCharacter> list = query.list();  
 		return list;
 	}
@@ -82,10 +91,21 @@ public class ChineseCharacterDaoImpl implements ChineseCharacterDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		String hql = null; 
 		if (choice == 0){
-			hql = "from ChineseCharacter where category=:category order by createTime desc";
+			if (category == 0){
+				hql = "from ChineseCharacter order by createTime desc";
+			}
+			else{
+				hql = "from ChineseCharacter where category=:category order by createTime desc";
+			}
 		}
 		else{
-			hql = "from ChineseCharacter where topTag=1 and category=:category order by createTime desc";
+			if (category == 0){
+				hql = "from ChineseCharacter where topTag=1 order by createTime desc";
+			}
+			else{
+				hql = "from ChineseCharacter where topTag=1 and category=:category order by createTime desc";
+			}
+			
 		}
 	 
         final Query query = session.createQuery(hql);   
@@ -100,8 +120,13 @@ public class ChineseCharacterDaoImpl implements ChineseCharacterDao {
 	public int getCountData(int category) {
 		Session session = this.getSessionFactory().getCurrentSession();
 		String hql = "select count(*) from ChineseCharacter where category=:category";  
+		if (category == 0){
+			hql = "select count(*) from ChineseCharacter ";  
+		}
 		Query query =  session.createQuery(hql);  
-		query.setParameter("category", category);
+		if (category == 0){
+			query.setParameter("category", category);
+		}
 		return ((Number)query.uniqueResult()).intValue();
 	}
 
