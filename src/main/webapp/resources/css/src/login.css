@@ -49,8 +49,8 @@ label.error{
     display: block;
 }
 /*icon图标*/
-.icon-gui:before {
-    content: "\e915";
+.icon-typo:before {
+    content: "\e930";
 }
 .icon-portrait:before{
     content: "\e924";
