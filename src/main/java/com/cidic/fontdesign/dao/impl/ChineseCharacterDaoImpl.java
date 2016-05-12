@@ -75,7 +75,7 @@ public class ChineseCharacterDaoImpl implements ChineseCharacterDao {
 		else{
 			hql = " from ChineseCharacter where category=:category order by createTime desc ";
 		}
-		System.out.println("==================:"+hql);
+
         final Query query = session.createQuery(hql);   
         query.setFirstResult(offset);    
         query.setMaxResults(limit); 

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,10 +32,12 @@ public class ChineseCharacterTag implements Serializable{
 	@OneToOne
 	private Tag tag;
 
+	@JsonBackReference
 	public ChineseCharacter getChineseCharacter() {
 		return chineseCharacter;
 	}
 
+	@JsonBackReference
 	public void setChineseCharacter(ChineseCharacter chineseCharacter) {
 		this.chineseCharacter = chineseCharacter;
 	}

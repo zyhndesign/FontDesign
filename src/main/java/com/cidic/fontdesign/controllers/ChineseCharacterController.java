@@ -78,7 +78,7 @@ public class ChineseCharacterController {
 	@ResponseBody 
 	public ResultModel insertCourseware(@RequestParam String title, @RequestParam String author,
 			@RequestParam String thumbnail,@RequestParam String createTime,@RequestParam String content,
-			@RequestParam int topTag,@RequestParam String abstract_,@RequestParam String insertTag){
+			@RequestParam int topTag,@RequestParam String abstract_,@RequestParam String insertTag,@RequestParam int category){
 		
 		ChineseCharacter chineseCharacter = new ChineseCharacter();
 		chineseCharacter.setTitle(title);
@@ -94,6 +94,8 @@ public class ChineseCharacterController {
 		chineseCharacter.setThumbnail(thumbnail);
 		chineseCharacter.setTopTag(topTag);
 		chineseCharacter.setAbstract_(abstract_);
+		chineseCharacter.setCategory(category);
+		
 		try{
 			chineseCharacterServiceImpl.insertChineseCharacter(chineseCharacter,insertTag);
 			resultModel = new ResultModel();
@@ -130,7 +132,8 @@ public class ChineseCharacterController {
 	@ResponseBody 
 	public ResultModel updateCourseware(@RequestParam String title, @RequestParam String author,
 			@RequestParam String thumbnail,@RequestParam String createTime,@RequestParam String content,
-			@RequestParam int topTag,@RequestParam String abstract_,@PathVariable int id,@RequestParam String insertTag,@RequestParam String deleteTag){
+			@RequestParam int topTag,@RequestParam String abstract_,@PathVariable int id,@RequestParam String insertTag,
+			@RequestParam String deleteTag,@RequestParam int category){
 		ChineseCharacter chineseCharacter = new ChineseCharacter();
 		chineseCharacter.setId(id);
 		chineseCharacter.setTitle(title);
@@ -146,6 +149,7 @@ public class ChineseCharacterController {
 		chineseCharacter.setThumbnail(thumbnail);
 		chineseCharacter.setTopTag(topTag);
 		chineseCharacter.setAbstract_(abstract_);
+		chineseCharacter.setCategory(category);
 		try{
 			chineseCharacterServiceImpl.updateChineseCharacter(chineseCharacter,insertTag,deleteTag);
 			resultModel = new ResultModel();
