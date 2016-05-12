@@ -1,4 +1,4 @@
-var courseDesignCOR=(function(config,functions){
+var specialDesignCOR=(function(config,functions){
     return{
         addTags:[],
         deleteTags:[],
@@ -15,7 +15,7 @@ var courseDesignCOR=(function(config,functions){
                     if(response.resultCode==200){
                         $().toastmessage("showSuccessToast",config.messages.optSuccess);
                         setTimeout(function(){
-                            window.location.href="coursedesign/courseDesignMgr";
+                            window.location.href="specialDesign/specialDesignMgr";
                         },3000);
                     }else{
                         functions.ajaxReturnErrorHandler(response.message);
@@ -82,13 +82,13 @@ $(document).ready(function(){
             tagId=$(this).data("tag-id");
 
         //存在tag-id,代表是修改的时候原始数据存在的tag，需要加入到deleteTags
-        if(tagId&&$.inArray(tagId,courseDesignCOR.deleteTags)==-1){
-            courseDesignCOR.deleteTags.push(tagId);
+        if(tagId&&$.inArray(tagId,specialDesignCOR.deleteTags)==-1){
+            specialDesignCOR.deleteTags.push(tagId);
         }else{
 
             //如果不是原始存在的tag,删除addTags中的数据
-            var index= $.inArray(tag,courseDesignCOR.addTags);
-            courseDesignCOR.addTags.splice(index,1);
+            var index= $.inArray(tag,specialDesignCOR.addTags);
+            specialDesignCOR.addTags.splice(index,1);
         }
 
         $(this).remove();
@@ -112,7 +112,7 @@ $(document).ready(function(){
                 $('<span class="tag">'+tag+'</span>').appendTo($("#tags"));
             }
 
-            courseDesignCOR.addTags.push(tag);
+            specialDesignCOR.addTags.push(tag);
 
             $(this).val("");
         }
@@ -177,7 +177,7 @@ $(document).ready(function(){
             if($("#tags .tag").length==0){
                 $().toastmessage("showErrorToast",config.messages.noTag);
             }else{
-                courseDesignCOR.submitForm(form);
+                specialDesignCOR.submitForm(form);
             }
 
         }

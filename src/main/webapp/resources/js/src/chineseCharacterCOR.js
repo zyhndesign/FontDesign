@@ -1,4 +1,4 @@
-var courseWareCOR=(function(config,functions){
+var chineseCharacterCOR=(function(config,functions){
     return{
         addTags:[],
         deleteTags:[],
@@ -15,7 +15,7 @@ var courseWareCOR=(function(config,functions){
                     if(response.resultCode==200){
                         $().toastmessage("showSuccessToast",config.messages.optSuccess);
                         setTimeout(function(){
-                            window.location.href="courseware/courseWareMgr";
+                            window.location.href="chineseCharacter/chineseCharacterMgr";
                         },3000);
                     }else{
                         functions.ajaxReturnErrorHandler(response.message);
@@ -74,13 +74,13 @@ $(document).ready(function(){
             tagId=$(this).data("tag-id");
 
         //存在tag-id,代表是修改的时候原始数据存在的tag，需要加入到deleteTags
-        if(tagId&&$.inArray(tagId,courseWareCOR.deleteTags)==-1){
-            courseWareCOR.deleteTags.push(tagId);
+        if(tagId&&$.inArray(tagId,chineseCharacterCOR.deleteTags)==-1){
+            chineseCharacterCOR.deleteTags.push(tagId);
         }else{
 
             //如果不是原始存在的tag,删除addTags中的数据
-            var index= $.inArray(tag,courseWareCOR.addTags);
-            courseWareCOR.addTags.splice(index,1);
+            var index= $.inArray(tag,chineseCharacterCOR.addTags);
+            chineseCharacterCOR.addTags.splice(index,1);
         }
 
         $(this).remove();
@@ -104,7 +104,7 @@ $(document).ready(function(){
                 $('<span class="tag">'+tag+'</span>').appendTo($("#tags"));
             }
 
-            courseWareCOR.addTags.push(tag);
+            chineseCharacterCOR.addTags.push(tag);
 
             $(this).val("");
         }
@@ -163,7 +163,7 @@ $(document).ready(function(){
             if($("#tags .tag").length==0){
                 $().toastmessage("showErrorToast",config.messages.noTag);
             }else{
-                courseWareCOR.submitForm(form);
+                chineseCharacterCOR.submitForm(form);
             }
         }
     });

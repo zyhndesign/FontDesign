@@ -40,21 +40,21 @@ pageEncoding="UTF-8"%>
                 <div class="form-group">
                     <label class="control-label col-md-2">封面图*</label>
                     <div class="col-md-10" id="uploadContainer">
-                    <a href="#" class="btn btn-success" id="uploadBtn">上传</a>
-                    <p class="help-block">请上传500x500的jpg，png</p>
+                        <a href="#" class="btn btn-success" id="uploadBtn">上传</a>
+                        <p class="help-block">请上传500x500的jpg，png</p>
 
-                    <c:if test="${empty chineseCharacter.thumbnail}">
-                    <img  id="image"  style="width:100px"
-                    src="resources/images/app/defaultPeopleImage.jpg"/>
-                    <input type="hidden" id="imageUrl" name="thumbnail">
-                    </c:if>
+                        <c:if test="${empty chineseCharacter.thumbnail}">
+                        <img  id="image"  style="width:100px"
+                        src="resources/images/app/defaultPeopleImage.jpg"/>
+                        <input type="hidden" id="imageUrl" name="thumbnail">
+                        </c:if>
 
-                    <c:if test="${!empty chineseCharacter.thumbnail}">
-                    <img  id="image"  style="width:100px"
-                    src="${chineseCharacter.thumbnail}"/>
-                    <input type="hidden" id="imageUrl" value="${chineseCharacter.thumbnail}" name="thumbnail">
-                    </c:if>
-
+                        <c:if test="${!empty chineseCharacter.thumbnail}">
+                        <img  id="image"  style="width:100px"
+                        src="${chineseCharacter.thumbnail}"/>
+                        <input type="hidden" id="imageUrl" value="${chineseCharacter.thumbnail}" name="thumbnail">
+                        </c:if>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label  class="control-label col-md-2">标题*</label>
