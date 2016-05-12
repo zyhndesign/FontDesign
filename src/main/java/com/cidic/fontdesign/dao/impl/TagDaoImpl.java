@@ -53,6 +53,7 @@ public class TagDaoImpl implements TagDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		String hqlVersionedSelect = "from Tag where tagName = :tagName";
 		Query query = session.createQuery(hqlVersionedSelect);
+		query.setParameter("tagName", tagName);
 		List<Tag> tagList = query.list();
 		if (tagList.size() > 0){
 			return tagList.get(0);

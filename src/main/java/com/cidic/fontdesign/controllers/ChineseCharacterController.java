@@ -175,10 +175,10 @@ public class ChineseCharacterController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces="application/json")  
 	@ResponseBody 
-	public ListResultModel listCourseware(@RequestParam int iDisplayLength, @RequestParam int iDisplayStart,@RequestParam String sEcho){
+	public ListResultModel listCourseware(@RequestParam int iDisplayLength, @RequestParam int iDisplayStart,@RequestParam String sEcho,@RequestParam int category){
 		ListResultModel listResultModel = new ListResultModel();
 		try{
-			ChineseCharacterPageModel chineseCharacterPageModel  = chineseCharacterServiceImpl.getDataByPage(iDisplayLength, iDisplayStart, sEcho);
+			ChineseCharacterPageModel chineseCharacterPageModel  = chineseCharacterServiceImpl.getDataByPage(iDisplayLength, iDisplayStart, sEcho,category);
 			List<ChineseCharacter> list = chineseCharacterPageModel.getList();
 			listResultModel.setAaData(list);
 			listResultModel.setsEcho(sEcho);
@@ -194,7 +194,8 @@ public class ChineseCharacterController {
 	
 	@RequestMapping(value = "/frontList", method = RequestMethod.GET, produces="application/json")  
 	@ResponseBody 
-	public ListResultModel frontListCourseware(HttpServletRequest request,HttpServletResponse response,@RequestParam int limit, @RequestParam int offset,@RequestParam int choice){
+	public ListResultModel frontListCourseware(HttpServletRequest request,HttpServletResponse response,@RequestParam int limit, @RequestParam int offset,
+			@RequestParam int choice,@RequestParam int category){
 		ListResultModel listResultModel = new ListResultModel();
 		try{
 			response.setContentType("text/html;charset=UTF-8");
@@ -202,7 +203,7 @@ public class ChineseCharacterController {
 		    if("IE".equals(request.getParameter("type"))){
 		    	response.addHeader("XDomainRequestAllowed","1");
 		    }
-			List<ChineseCharacter> list = chineseCharacterServiceImpl.getFrontDataByPage(limit, offset, choice);
+			List<ChineseCharacter> list = chineseCharacterServiceImpl.getFrontDataByPage(limit, offset, choice,category);
 			listResultModel.setAaData(list);
 			listResultModel.setiTotalRecords(list.size());
 			listResultModel.setiTotalDisplayRecords(offset + list.size());

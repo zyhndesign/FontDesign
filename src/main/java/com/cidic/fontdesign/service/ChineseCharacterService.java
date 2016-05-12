@@ -17,7 +17,7 @@ public interface ChineseCharacterService {
 	
 	public List<ChineseCharacter> getTopChineseCharacter();
 	
-	public ChineseCharacterPageModel getDataByPage(int limit, int offset, String sEcho);
+	public ChineseCharacterPageModel getDataByPage(int limit, int offset, String sEcho,int category);
 	
-	public List<ChineseCharacter> getFrontDataByPage(int limit, int offset, int choice);
+	public List<ChineseCharacter> getFrontDataByPage(int limit, int offset, int choice,int category);
 }

@@ -143,18 +143,18 @@ public class ChineseCharacterServiceImpl implements ChineseCharacterService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public ChineseCharacterPageModel getDataByPage(int limit, int offset, String sEcho) {
+	public ChineseCharacterPageModel getDataByPage(int limit, int offset, String sEcho,int category) {
 		ChineseCharacterPageModel coursewarePageModel = new ChineseCharacterPageModel();
-		List<ChineseCharacter> list = chineseCharacterDaoImpl.getDataByPage(limit, offset, sEcho);
-		int count = chineseCharacterDaoImpl.getCountData();
+		List<ChineseCharacter> list = chineseCharacterDaoImpl.getDataByPage(limit, offset, sEcho,category);
+		int count = chineseCharacterDaoImpl.getCountData(category);
 		coursewarePageModel.setList(list);
 		coursewarePageModel.setCount(count);
 		return coursewarePageModel;
 	}
 
 	@Override
-	public List<ChineseCharacter> getFrontDataByPage(int limit, int offset, int choice) {
-		return chineseCharacterDaoImpl.getFrontDataByPage(limit, offset, choice);
+	public List<ChineseCharacter> getFrontDataByPage(int limit, int offset, int choice,int category) {
+		return chineseCharacterDaoImpl.getFrontDataByPage(limit, offset, choice,category);
 	}
 
 }

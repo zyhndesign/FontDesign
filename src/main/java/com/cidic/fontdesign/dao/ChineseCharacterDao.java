@@ -17,9 +17,9 @@ public interface ChineseCharacterDao {
 	
 	public void deleteChineseCharacter(ChineseCharacter chineseCharacter);
 	
-	public List<ChineseCharacter> getDataByPage(int limit, int offset, String sEcho);
+	public List<ChineseCharacter> getDataByPage(int limit, int offset, String sEcho,int category);
 	
-	public List<ChineseCharacter> getFrontDataByPage(int limit, int offset, int choice);
+	public List<ChineseCharacter> getFrontDataByPage(int limit, int offset, int choice,int category);
 	
-	public int getCountData();
+	public int getCountData(int category);
 }
