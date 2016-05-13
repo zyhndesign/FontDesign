@@ -85,7 +85,7 @@ pageEncoding="UTF-8"%>
                 <div class="form-group">
                     <label  class="control-label col-md-2">分类*</label>
                     <div class="col-md-8">
-                        <select class="form-control" name="topTag">
+                        <select class="form-control" name="category">
                             <%
                                 HashMap<Integer, String> categories = new HashMap<Integer, String>(); // Map
                                 categories.put(1, "汉字故事");
