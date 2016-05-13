@@ -51,6 +51,9 @@ public class ChineseCharacter implements Serializable {
 	@Column(name="content")
 	private String content;
 
+	@Column(name="bg")
+	private String bg;
+	
 	@OneToMany(mappedBy = "chineseCharacter",cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<ChineseCharacterTag> chineseCharacterTag;
 	
@@ -132,6 +135,14 @@ public class ChineseCharacter implements Serializable {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public String getBg() {
+		return bg;
+	}
+
+	public void setBg(String bg) {
+		this.bg = bg;
 	}
 	
 }

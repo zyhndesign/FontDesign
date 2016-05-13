@@ -76,9 +76,10 @@ public class ChineseCharacterController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces="application/json")  
 	@ResponseBody 
-	public ResultModel insertCourseware(@RequestParam String title, @RequestParam String author,
+	public ResultModel insertChinese(@RequestParam String title, @RequestParam String author,
 			@RequestParam String thumbnail,@RequestParam String createTime,@RequestParam String content,
-			@RequestParam int topTag,@RequestParam String abstract_,@RequestParam String insertTag,@RequestParam int category){
+			@RequestParam int topTag,@RequestParam String abstract_,@RequestParam String insertTag,
+			@RequestParam int category,@RequestParam String bg){
 		
 		ChineseCharacter chineseCharacter = new ChineseCharacter();
 		chineseCharacter.setTitle(title);
@@ -95,7 +96,7 @@ public class ChineseCharacterController {
 		chineseCharacter.setTopTag(topTag);
 		chineseCharacter.setAbstract_(abstract_);
 		chineseCharacter.setCategory(category);
-		
+		chineseCharacter.setBg(bg);
 		try{
 			chineseCharacterServiceImpl.insertChineseCharacter(chineseCharacter,insertTag);
 			resultModel = new ResultModel();
@@ -109,7 +110,7 @@ public class ChineseCharacterController {
 	
 	@RequestMapping(value = "/select/{id}", method = RequestMethod.GET, produces="application/json")  
 	@ResponseBody 
-	public ResultModel selectCourseware(HttpServletRequest request,HttpServletResponse response,@PathVariable int id) throws Exception{
+	public ResultModel selectChinese(HttpServletRequest request,HttpServletResponse response,@PathVariable int id) throws Exception{
 		ChineseCharacter chineseCharacter = null;
 		try{
 			response.setContentType("text/html;charset=UTF-8");
@@ -130,10 +131,10 @@ public class ChineseCharacterController {
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST, produces="application/json")  
 	@ResponseBody 
-	public ResultModel updateCourseware(@RequestParam String title, @RequestParam String author,
+	public ResultModel updateChinese(@RequestParam String title, @RequestParam String author,
 			@RequestParam String thumbnail,@RequestParam String createTime,@RequestParam String content,
 			@RequestParam int topTag,@RequestParam String abstract_,@PathVariable int id,@RequestParam String insertTag,
-			@RequestParam String deleteTag,@RequestParam int category){
+			@RequestParam String deleteTag,@RequestParam int category,@RequestParam String bg){
 		ChineseCharacter chineseCharacter = new ChineseCharacter();
 		chineseCharacter.setId(id);
 		chineseCharacter.setTitle(title);
@@ -150,6 +151,7 @@ public class ChineseCharacterController {
 		chineseCharacter.setTopTag(topTag);
 		chineseCharacter.setAbstract_(abstract_);
 		chineseCharacter.setCategory(category);
+		chineseCharacter.setBg(bg);
 		try{
 			chineseCharacterServiceImpl.updateChineseCharacter(chineseCharacter,insertTag,deleteTag);
 			resultModel = new ResultModel();
@@ -163,7 +165,7 @@ public class ChineseCharacterController {
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces="application/json")  
 	@ResponseBody 
-	public ResultModel deleteCourseware(@PathVariable int id){
+	public ResultModel deleteChinese(@PathVariable int id){
 		ChineseCharacter chineseCharacter = new ChineseCharacter();
 		chineseCharacter.setId(id);
 		try{
@@ -179,7 +181,7 @@ public class ChineseCharacterController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces="application/json")  
 	@ResponseBody 
-	public ListResultModel listCourseware(@RequestParam int iDisplayLength, @RequestParam int iDisplayStart,@RequestParam String sEcho,@RequestParam int category){
+	public ListResultModel listChinese(@RequestParam int iDisplayLength, @RequestParam int iDisplayStart,@RequestParam String sEcho,@RequestParam int category){
 		ListResultModel listResultModel = new ListResultModel();
 		try{
 			ChineseCharacterPageModel chineseCharacterPageModel  = chineseCharacterServiceImpl.getDataByPage(iDisplayLength, iDisplayStart, sEcho,category);
@@ -198,7 +200,7 @@ public class ChineseCharacterController {
 	
 	@RequestMapping(value = "/frontList", method = RequestMethod.GET, produces="application/json")  
 	@ResponseBody 
-	public ListResultModel frontListCourseware(HttpServletRequest request,HttpServletResponse response,@RequestParam int limit, @RequestParam int offset,
+	public ListResultModel frontListChinese(HttpServletRequest request,HttpServletResponse response,@RequestParam int limit, @RequestParam int offset,
 			@RequestParam int choice,@RequestParam int category){
 		ListResultModel listResultModel = new ListResultModel();
 		try{
