@@ -68,6 +68,28 @@ $(document).ready(function(){
             }
         }
     });
+    functions.createQiNiuUploader({
+        maxSize:config.uploader.sizes.img,
+        filter:config.uploader.filters.img,
+        uploadBtn:"uploadBgBtn",
+        multiSelection:false,
+        multipartParams:null,
+        uploadContainer:"uploadBgContainer",
+        fileAddCb:null,
+        progressCb:null,
+        uploadedCb:function(info,file,up){
+            //后台的up-token里面要注明返回图片信息
+            if(info.w==960&&info.h==540){
+                $("#bgUrl").val(info.url);
+
+                $("#bg").attr("src",info.url);
+
+                $(".error[for='bgUrl']").remove();
+            }else{
+                $().toastmessage("showErrorToast",config.messages.imageSizeError);
+            }
+        }
+    });
 
     $("#tags").on("click",".tag",function(){
         var tag=$(this).val(),

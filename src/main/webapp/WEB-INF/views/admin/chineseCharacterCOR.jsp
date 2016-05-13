@@ -57,6 +57,26 @@ pageEncoding="UTF-8"%>
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label col-md-2">背景图*</label>
+                    <div class="col-md-10" id="uploadBgContainer">
+                        <a href="#" class="btn btn-success" id="uploadBgBtn">上传</a>
+                        <p class="help-block">请上传960x540的jpg，png</p>
+
+                        <c:if test="${empty specialDesign.bg}">
+                            <img  id="bg"  style="width:200px"
+                        src="resources/images/app/defaultBg.png"/>
+                            <input type="hidden" id="bgUrl" name="bg">
+                        </c:if>
+
+                        <c:if test="${!empty specialDesign.bg}">
+                            <img  id="bg"  style="width:200px"
+                            src="${specialDesign.bg}"/>
+                            <input type="hidden" id="bgUrl" value="${specialDesign.bg}" name="bg">
+                        </c:if>
+
+                    </div>
+                </div>
+                <div class="form-group">
                     <label  class="control-label col-md-2">标题*</label>
                     <div class="col-md-8">
                         <input type="text" class="form-control" value="${chineseCharacter.title}" name="title">
