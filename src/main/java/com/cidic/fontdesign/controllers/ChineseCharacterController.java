@@ -210,6 +210,7 @@ public class ChineseCharacterController {
 		    	response.addHeader("XDomainRequestAllowed","1");
 		    }
 			List<ChineseCharacter> list = chineseCharacterServiceImpl.getFrontDataByPage(limit, offset, choice,category);
+			
 			listResultModel.setAaData(list);
 			listResultModel.setiTotalRecords(list.size());
 			listResultModel.setiTotalDisplayRecords(offset + list.size());

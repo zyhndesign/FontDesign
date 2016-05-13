@@ -111,8 +111,10 @@ public class ChineseCharacterDaoImpl implements ChineseCharacterDao {
         final Query query = session.createQuery(hql);   
         query.setFirstResult(offset);    
         query.setMaxResults(limit); 
-        query.setParameter("category", category);
-        final List<ChineseCharacter> list = query.list();  
+        if (category == 1){
+        	query.setParameter("category", category);
+        }
+        final List<ChineseCharacter> list = query.list(); 
 		return list;
 	}
 
