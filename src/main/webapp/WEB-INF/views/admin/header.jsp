@@ -3,7 +3,7 @@
     <div class="header">
         <h1 class="logo">
             <a href="#">
-                <span class="icon-gui"></span>GUI
+                <span class="icon-typo"></span>TYPO
             </a>
         </h1>
     </div>
