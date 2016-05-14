@@ -76,7 +76,7 @@ public class SpecialDesignTagDaoImpl implements SpecialDesignTagDao {
 		String sqlSelected = "select c.id as course_design_tag_id, t.id as tagId, d.id as special_design_id,"
 				+ "t.tag_name,d.abstract,d.special_detail_id,d.create_time,d.teacher,d.title, d.top_tag from"
 				+ "  special_design_tag c cross  join  tag t cross join  special_design d  where"
-				+ "  d.id=c.special_design_id  and c.tag_id=t.id  and ( t.tag_name in (:tagNames ) )";
+				+ "  d.id=c.specialDesign_id  and c.tag_id=t.id  and ( t.tag_name in (:tagNames ) )";
         
 		Query query=session.createSQLQuery(sqlSelected);
 		query.setParameterList("tagNames", tagName);

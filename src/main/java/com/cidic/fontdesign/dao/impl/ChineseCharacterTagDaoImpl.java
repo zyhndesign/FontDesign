@@ -78,7 +78,7 @@ public class ChineseCharacterTagDaoImpl implements ChineseCharacterTagDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		String sqlSelected = "select c.id as chineseCharacter_tag_id, t.id as tagId, d.id as chineseCharacter_id, t.tag_name, d.title, d.author,"
 				+ " d.thumbnail, d.create_time, d.content, d.top_tag  from chinese_character_tag c cross  join tag t cross  join"
-				+ " chinese_character d  where d.id=c.chinese_character_id  and c.tag_id=t.id  and ( t.tag_name in ( :tagNames ))";
+				+ " chinese_character d  where d.id=c.chineseCharacter_id  and c.tag_id=t.id  and ( t.tag_name in ( :tagNames ))";
         
 		Query query=session.createSQLQuery(sqlSelected);
 		query.setParameterList("tagNames", tagName);
