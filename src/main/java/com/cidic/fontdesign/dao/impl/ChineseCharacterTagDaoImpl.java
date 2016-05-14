@@ -77,7 +77,7 @@ public class ChineseCharacterTagDaoImpl implements ChineseCharacterTagDao {
 	public List<ChineseCharacter> getChineseCharacterByTagName(List<String> tagName) {
 		Session session = this.getSessionFactory().getCurrentSession();
 		String sqlSelected = "select c.id as chineseCharacter_tag_id, t.id as tagId, d.id as chineseCharacter_id, t.tag_name, d.title, d.author,"
-				+ " d.thumbnail, d.create_time, d.content, d.top_tag  from chinese_character_tag c cross  join tag t cross  join"
+				+ " d.thumbnail, d.create_time, d.content, d.top_tag, d.bg  from chinese_character_tag c cross  join tag t cross  join"
 				+ " chinese_character d  where d.id=c.chineseCharacter_id  and c.tag_id=t.id  and ( t.tag_name in ( :tagNames ))";
         
 		Query query=session.createSQLQuery(sqlSelected);
@@ -96,8 +96,9 @@ public class ChineseCharacterTagDaoImpl implements ChineseCharacterTagDao {
 			chineseCharacter.setContent(String.valueOf(role[8]));
 			chineseCharacter.setCreateTime(DateUtil.stringToDate(String.valueOf(role[7])));
 			chineseCharacter.setTitle(String.valueOf(role[4]));
-			chineseCharacter.setThumbnail(String.valueOf(6));
+			chineseCharacter.setThumbnail(String.valueOf(role[6]));
 			chineseCharacter.setTopTag(Integer.parseInt(String.valueOf(role[9])));
+			chineseCharacter.setBg(String.valueOf(role[10]));
 		    Tag tag = new Tag();
 		    tag.setId(Integer.parseInt(String.valueOf(role[1])));
 		    tag.setTagName(String.valueOf(role[3]));
